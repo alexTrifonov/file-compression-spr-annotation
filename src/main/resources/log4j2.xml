@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+    	<Property name="filename">logs/file-compression.log</Property>
+  </Properties>
+  
+ 
+  <Appenders>
+    <Console name="STDOUT">
+      <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/> 
+    </Console>
+    <RollingFile name="RollingFile" fileName="${filename}" filePattern="logs/file-compression-%d{yyyy_MM_dd}-%i.zip">
+      <PatternLayout>
+        <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <!--TimeBasedTriggeringPolicy interval="1" modulate="true"/-->
+        <SizeBasedTriggeringPolicy size="5 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy fileIndex="nomax"/>
+    </RollingFile>
+  </Appenders>
+ 
+  <Loggers> 
+    <Root level="info">
+      <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="RollingFile" />
+    </Root>
+  </Loggers>
+</Configuration>
